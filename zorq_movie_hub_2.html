@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZORQ MOVIE HUB 2.0</title>
+<style>
+:root{--bg:#08090d;--panel:#11131a;--muted:#9da1ad;--line:#242733;--accent:#e50914}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#fff;font-family:Arial,sans-serif}
+header{position:sticky;top:0;z-index:20;background:rgba(8,9,13,.96);border-bottom:1px solid var(--line)}
+.nav{max-width:1200px;margin:auto;padding:16px 20px;display:flex;align-items:center;gap:25px}.logo{font-size:24px;font-weight:900;letter-spacing:1px}.logo b{color:var(--accent)}
+nav{margin-left:auto;display:flex;gap:18px}nav a{color:#ddd;text-decoration:none;font-size:14px}nav a:hover{color:#fff}
+.hero{min-height:480px;background:linear-gradient(90deg,#08090d 8%,rgba(8,9,13,.75) 48%,rgba(8,9,13,.15)),linear-gradient(0deg,#08090d,transparent 45%),url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1800&q=80") center/cover;display:flex;align-items:end}
+.hero-inner{max-width:1200px;width:100%;margin:auto;padding:70px 20px}.tag{display:inline-block;background:var(--accent);padding:7px 11px;border-radius:4px;font-size:12px;font-weight:bold}.hero h1{font-size:52px;max-width:650px;margin:15px 0}.hero p{max-width:590px;color:#d0d2d8;line-height:1.6}.btn{display:inline-block;margin:10px 8px 0 0;padding:12px 18px;border-radius:5px;text-decoration:none;font-weight:bold;border:1px solid #444;background:#20222b;color:#fff;cursor:pointer}.primary{background:var(--accent);border-color:var(--accent)}
+main{max-width:1200px;margin:auto;padding:35px 20px}.search{display:flex;gap:10px;margin-bottom:35px}.search input{flex:1;background:var(--panel);border:1px solid var(--line);color:#fff;padding:14px;border-radius:6px;outline:none}
+h2{font-size:24px;margin:0 0 18px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:25px}.tab{background:#171922;border:1px solid var(--line);color:#ddd;padding:9px 13px;border-radius:20px;cursor:pointer}.tab.active{background:var(--accent);border-color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:17px}.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;transition:.2s}.card:hover{transform:translateY(-5px);border-color:#444}
+.poster{height:280px;background:center/cover}.info{padding:12px}.info h3{font-size:15px;margin:0 0 7px}.meta{font-size:12px;color:var(--muted)}
+.empty{color:var(--muted);padding:30px;text-align:center;display:none}.detail{display:none;margin-top:40px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:22px}.detail-wrap{display:flex;gap:25px}.detail-poster{width:220px;height:320px;background:center/cover;border-radius:7px;flex:none}.detail p{color:#c4c6ce;line-height:1.6}.close{float:right;background:none;border:1px solid #444;color:#fff;border-radius:4px;padding:6px 10px;cursor:pointer}
+section{scroll-margin-top:80px}footer{border-top:1px solid var(--line);margin-top:30px;padding:28px;text-align:center;color:#777}
+@media(max-width:900px){.grid{grid-template-columns:repeat(3,1fr)}nav{display:none}}@media(max-width:600px){.hero h1{font-size:36px}.grid{grid-template-columns:repeat(2,1fr)}.poster{height:240px}.detail-wrap{flex-direction:column}.detail-poster{width:100%;height:360px}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="logo">ZORQ <b>MOVIE HUB</b></div><nav><a href="#">Home</a><a href="#movies">Movies</a><a href="#categories">Categories</a><a href="#about">About</a></nav></div></header>
+
+<section class="hero"><div class="hero-inner">
+<span class="tag">ZORQ ORIGINAL HUB</span><h1>Discover Your Next Movie</h1>
+<p>Explore movie information, trailers, genres and entertainment updates in one clean cinematic website.</p>
+<a class="btn primary" href="#movies">Explore Movies</a><a class="btn" href="#categories">Categories</a>
+</div></section>
+
+<main>
+<section id="movies">
+<div class="search"><input id="search" placeholder="🔎 Search movies by title..."></div>
+<div class="tabs" id="categories">
+<button class="tab active" data-cat="All">All</button><button class="tab" data-cat="Bollywood">Bollywood</button><button class="tab" data-cat="Hollywood">Hollywood</button><button class="tab" data-cat="Pakistani">Pakistani</button><button class="tab" data-cat="Drama">Drama</button><button class="tab" data-cat="Action">Action</button>
+</div>
+<h2>🔥 Latest Movies</h2>
+<div class="grid" id="grid"></div><div class="empty" id="empty">No movies found.</div>
+</section>
+
+<section class="detail" id="detail"><button class="close" id="close">✕ Close</button><div class="detail-wrap"><div class="detail-poster" id="dposter"></div><div><h2 id="dtitle"></h2><div class="meta" id="dmeta"></div><p id="ddesc"></p><a class="btn primary" id="trailer" target="_blank" rel="noopener">▶ Watch Official Trailer</a></div></div></section>
+
+<section id="about" style="margin-top:45px"><h2>About ZORQ MOVIE HUB</h2><p style="color:#aaa;line-height:1.6">A modern entertainment hub for movie information, trailers, genres and updates. Replace the demo entries with content you are authorized to publish or official trailer links.</p></section>
+</main>
+<footer>© 2026 ZORQ MOVIE HUB • Movies • Trailers • Entertainment</footer>
+
+<script>
+const movies=[
+{title:"Cinema Night",cat:"Hollywood",year:"2026",genre:"Drama",img:"https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=700&q=80",desc:"A demo movie entry for the ZORQ MOVIE HUB homepage.",url:"https://www.youtube.com/results?search_query=official+movie+trailer"},
+{title:"Action Zone",cat:"Bollywood",year:"2026",genre:"Action",img:"https://images.unsplash.com/photo-1535016120720-40c646be5580?auto=format&fit=crop&w=700&q=80",desc:"A demo action entry. Add your authorized movie details here.",url:"https://www.youtube.com/results?search_query=official+bollywood+trailer"},
+{title:"The Story",cat:"Drama",year:"2026",genre:"Romance",img:"https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=700&q=80",desc:"A demo drama entry for testing the detail page.",url:"https://www.youtube.com/results?search_query=official+drama+trailer"},
+{title:"Big Screen",cat:"Hollywood",year:"2026",genre:"Entertainment",img:"https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=700&q=80",desc:"A demo entertainment entry for your new website.",url:"https://www.youtube.com/results?search_query=official+movie+trailer"},
+{title:"Movie One",cat:"Pakistani",year:"2026",genre:"Drama",img:"https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=700&q=80",desc:"A demo Pakistani entertainment entry.",url:"https://www.youtube.com/results?search_query=official+pakistani+drama+trailer"}
+];
+const grid=document.getElementById("grid"),search=document.getElementById("search"),empty=document.getElementById("empty");
+let category="All";
+function render(){let q=search.value.toLowerCase();let list=movies.filter(m=>(category==="All"||m.cat===category||m.genre===category)&&m.title.toLowerCase().includes(q));grid.innerHTML=list.map((m,i)=>`<article class="card" onclick="openDetail(${movies.indexOf(m)})"><div class="poster" style="background-image:url('${m.img}')"></div><div class="info"><h3>${m.title}</h3><div class="meta">${m.year} • ${m.cat} • ${m.genre}</div></div></article>`).join("");empty.style.display=list.length?"none":"block"}
+function openDetail(i){let m=movies[i];document.getElementById("detail").style.display="block";document.getElementById("dposter").style.backgroundImage=`url('${m.img}')`;document.getElementById("dtitle").textContent=m.title;document.getElementById("dmeta").textContent=`${m.year} • ${m.cat} • ${m.genre}`;document.getElementById("ddesc").textContent=m.desc;document.getElementById("trailer").href=m.url;document.getElementById("detail").scrollIntoView({behavior:"smooth"})}
+document.getElementById("close").onclick=()=>document.getElementById("detail").style.display="none";
+search.oninput=render;document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));b.classList.add("active");category=b.dataset.cat;render()});render();
+</script>
+</body></html>
